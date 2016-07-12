@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.larva";
+option java_outer_classname = "LarvaProto";
+
+package larva;
+
+service Execute {
+        rpc CMD (Request) returns (Reply) {}
+        rpc StreamCMD (Request) returns (stream Reply) {}
+        rpc List (Empty) returns (stream Info) {}
+        rpc Status (ID) returns (Info) {}
+}
+
+message Empty {}
+
+message Request {
+        string name = 1;
+        string command = 2;
+        string argument = 3;
+}
+
+message Reply {
+        string message = 1;
+}
+
+message Info {
+        int32 id = 1;
+        string name = 2;
+        string status = 3;
+}
+
+message ID {
+        int32 id = 1;
+}
